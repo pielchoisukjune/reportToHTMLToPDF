@@ -74,7 +74,12 @@ var fileNms_O = {
 };
 
 var oldPath = "C:/Users/Administrator/Downloads/";
-var newPath = "D:/workspace_csj/html-pdf/";
+var newPath = process.cwd() + "/";
+
+var savePath = newPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/";
+var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + ".html"
+console.log( savePath );
+
 
 //-----------------------------------------------------------------;
 // FUNCTIONS;
@@ -85,8 +90,6 @@ var newPath = "D:/workspace_csj/html-pdf/";
 // 이미지이동
 //-----------------------------------------------------------------;
 ( function(){
-	var fs = require('fs');
-
 	
 	fileNms_A.forEach(function(item){
 		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + item + ".png";
@@ -796,4 +799,6 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				.replace( "<!=MONTHLY_GOOGLE_STASTICS=!>", FN08( _o_data.google_total ) )
 				.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
 
-fs.writeFileSync( "./report.html", _tString,{ flag : 'w' } )
+
+
+fs.writeFileSync( savePath + saveFileNm , _tString,{ flag : 'w' } )
