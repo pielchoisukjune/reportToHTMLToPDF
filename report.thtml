@@ -1,0 +1,85 @@
+<!-- <meta charset="utf-8"> -->
+<style>
+	@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	h1,h2,h3,h4,table{ font-family: 'Noto Sans KR'; }
+	.align_center{ text-align:center;}
+	.pad_20{ padding : 20px;}
+	table, td, th { border: 1px solid #ccc; }
+	table { width: 100%; border-collapse: collapse; }
+	td,th{ padding :5px; color : #000; }
+	th{ background-color:#000; color:#fff; }
+	td{ font-size : 11px;}
+
+
+	#monthly_stastic thead tr{ font-size :12px;}
+
+
+	#monthly_stastic td:nth-child(1) { width :22%; }
+	#monthly_stastic td:nth-child(2) { width :22%; }
+/*	#monthly_stastic td:nth-child(3) { width :8%; }*/
+/*	#monthly_stastic td:nth-child(4) { width :8%; }*/
+/*	#monthly_stastic td:nth-child(5) { width :8%; }*/
+/*	#monthly_stastic td:nth-child(6) { width :8%; }*/
+/*	#monthly_stastic td:nth-child(7) { width :8%; }*/
+/*	#monthly_stastic td:nth-child(8) { width :8%; }*/
+
+	#marketing_list thead tr{ font-size :12px;}
+
+	#marketing_list td:nth-child(1) { width :10%; }
+	#marketing_list td:nth-child(2) { width :10%; }
+	#marketing_list td:nth-child(3) { width :10%; }
+	#marketing_list td:nth-child(4) { width :30%; }
+	#marketing_list td:nth-child(5) { width :8%; }
+	#marketing_list td:nth-child(6) { width :8%; }
+	#marketing_list td:nth-child(7) { width :8%; }
+	#marketing_list td:nth-child(8) { width :8%; }
+	#marketing_list td:nth-child(9) { width :8%; }
+
+	#marketing_list .link { width :50%; }
+	
+	#marketing_list_total thead tr{ font-size :12px;}
+/*	#marketing_list_total tr{ max-width: 100px;}*/
+/*	#marketing_list_total table{ table-layout:fixed; }*/
+
+	#monthly_facebook_stastics thead tr{ font-size :12px;}
+	
+	#facebook_location thead tr{ font-size :12px;}
+/*	#facebook_location table{ border: 0px solid #ccc; }*/
+
+	#kols thead tr{ font-size :12px;}
+
+	#kols td:nth-child(1) { width :100px; }
+	#kols td:nth-child(2) { width :100px; }
+	#kols td:nth-child(3) { width :100px; }
+	#kols td:nth-child(4) { width :100px; }
+	#kols td:nth-child(5) { width :100px; }
+	#kols td:nth-child(6) { width :400px; }
+
+	#google_total thead tr{ font-size :12px;}
+
+	#facebook_age table { border : 0px solid #fff!Important;}
+
+</style>
+<div style="width: 100%;height: 250mm;">
+	<div style="text-align:center;height:100px;line-height:100px;padding-top : 150px;">
+		<h1 style="font-size : 70px;"><!=TARGET_BRAND=!></h1>
+	</div>
+	<div style="text-align:center;height:100px;line-height:100px;">
+		<h1><!=TARGET_YEAR=!>.<!=TARGET_MONTH=!></h1>
+	</div>
+	<div style="text-align:center;height:100px;line-height:100px;padding-bottom : 300px;">
+		<h1>Marketing Report.</h1>
+	</div>
+</div>
+<div style="padding : 0px 0px;"><!=MONTHLY_STATSTIC=!></div>
+<div style="padding : 0px 0px;"><!=INSIGHT=!></div>
+<div style="padding : 0px 0px;"><!=MONTHLY_FACEBOOK_STASTICS=!></div>
+<div style="padding : 0px 0px;"><!=FACEBOOK_PIE_CHART=!></div>
+<div style="padding : 0px 0px;"><!=FACEBOOK_BAR_CHART=!></div>
+<div style="padding : 0px 0px;"><!=FACEBOOK_LOCATION_CHART=!></div>
+<div style="padding : 0px 0px;"><!=FACEBOOK_LOCATION=!></div>
+<div style="padding : 0px 0px;"><!=MONTHLY_GOOGLE_STASTICS=!></div>
+<div style="padding : 0px 0px;"><!=GOOGLE_BAR_CHART=!></div>
+<div style="padding : 0px 0px;"><!=KOLS=!></div>
+<div style="padding : 0px 0px;"><!=MARKETING_LIST_TOTAL=!></div>
+<div style="padding : 0px 0px;"><!=MARKETING_LIST=!></div>
