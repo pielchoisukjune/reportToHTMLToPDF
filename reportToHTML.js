@@ -12,36 +12,27 @@ global.CONST.config = {};
 
 //global.CONST.config.brandNm = "varihope";
 global.CONST.config.brandNm = "wellderma";
-
 global.CONST.config.targetYear = "2020";
 global.CONST.config.targetMonth = "10";
-
+global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
 //-----------------------------------------------------------------;
 
-var path = "D:/workspace_piel/marketing_report/brand/" + global.CONST.config.brandNm + "/"
-var fileNm = global.CONST.config.targetYear + global.CONST.config.targetMonth + "_data.json"
-var reportSourceFileNm = "./report.thtml";
-var reportSource = fs.readFileSync( reportSourceFileNm ).toString();
-
-var _data = fs.readFileSync( path + fileNm );
+var reportSourcePath = "D:/workspace_piel/marketing_report/brand/" + global.CONST.config.brandNm + "/"
+var reportSourcefileNm = global.CONST.config.targetYear + global.CONST.config.targetMonth + "_data.json"
+var reportSourceThtmlFileNm = "./report.thtml";
+var reportSource = fs.readFileSync( reportSourceThtmlFileNm ).toString();
+var _data = fs.readFileSync( reportSourcePath + reportSourcefileNm ).toString();
 var _o_data = JSON.parse( _data );
 
 var bramdNms = {
-	varihop : {
-		text : "VARI:HOPE"
-		, imgPath : "" 
-	}
-	, wellderma : {
-		text : "WELLDERMA"
-		, imgPath : "" 
-	}
-	, ahead : {
-		text : "AHEADS"
-		, imgPath : "" 
-	}
-}
+	varihop : { text : "VARI:HOPE", imgPath : "" }
+	, wellderma : { text : "WELLDERMA", imgPath : "" }
+	, ahead : { text : "AHEADS", imgPath : "" }
+	, ash7 : { text : "ash7", imgPath : "" }
+	, bxxxy : { text : "bxxxy", imgPath : "" }
+};
 
 var fileNms_A = [
 	"chartdiv00"
@@ -55,81 +46,24 @@ var fileNms_A = [
 ];
 
 var fileNms_O = {
-	facebook_age_pie : {
-		isExist : false
-		, data : []
-	}
-	, facebook_time_bar : {
-		isExist : false
-		, data : []	
-	}
-	, google_time_bar : {
-		isExist : false
-		, data : []	
-	}
-	, facebook_location_map : {
-		isExist : false
-		, data : []	
-	}
+	facebook_age_pie : { isExist : false, data : []	}
+	, facebook_time_bar : { isExist : false, data : [] }
+	, google_time_bar : { isExist : false, data : [] }
+	, facebook_location_map : { isExist : false, data : [] }
 };
 
 var oldPath = "C:/Users/Administrator/Downloads/";
-var newPath = process.cwd() + "/";
 
-var savePath = newPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/";
+
+var savePath = global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/";
 var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + ".html"
-console.log( savePath );
-
 
 //-----------------------------------------------------------------;
 // FUNCTIONS;
 //-----------------------------------------------------------------;
-
-
-//-----------------------------------------------------------------;
-// 이미지이동
-//-----------------------------------------------------------------;
-( function(){
-	
-	fileNms_A.forEach(function(item){
-		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + item + ".png";
-		console.log( fileNm );
-		var old = oldPath + fileNm;
-		if( fs.existsSync( old ) )
-		{	
-			if( item == "chartdiv00" || item == "chartdiv01" || item == "chartdiv02" || item == "chartdiv03")
-			{
-				fileNms_O.facebook_age_pie.isExist = true;
-				fileNms_O.facebook_age_pie.data.push( item )
-			}
-			else if( item == "chartdiv04" )
-			{
-				fileNms_O.facebook_time_bar.isExist = true;
-				fileNms_O.facebook_time_bar.data.push( item )
-			}
-			else if( item == "chartdiv13" || item == "chartdiv14" )
-			{
-				fileNms_O.google_time_bar.isExist = true;
-				fileNms_O.google_time_bar.data.push( item )
-			}
-			else if( item == "facebook_location" )
-			{
-				fileNms_O.facebook_location_map.isExist = true;
-				fileNms_O.facebook_location_map.data.push( item )
-			}
-
-			var dest = newPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm;
-			fs.copyFileSync( old, dest );		
-		}	
-	})
-	
-}
-)();
-
-
-//-----------------------------------------------------------------;
-// 월간마케팅 현황
-//-----------------------------------------------------------------;
+/*
+ *월간마케팅 현황
+ */
 var FN00 = function( d ){
 	var title = "월간마케팅 현황"
 	console.log( '[S] - FN00 - ' + title );
@@ -183,10 +117,9 @@ var FN00 = function( d ){
          },
 */
 
-
-//-----------------------------------------------------------------;
-// 마케팅리스트 현황
-//-----------------------------------------------------------------;
+/*
+ * 마케팅리스트 현황
+ */
 var FN01 = function( d ){
 	var title = "마케팅집행리스트"
 	console.log( '[S] - FN01 - ' + title );
@@ -235,9 +168,9 @@ var FN01 = function( d ){
 	return r;
 }
 
-//-----------------------------------------------------------------;
-// 광고집행내역통계
-//-----------------------------------------------------------------;
+/*
+ * 광고집행내역통계
+ */
 var FN02 = function( d ){
 	var title = "광고집행내역통계"
 	console.log( '[S] - FN02 - ' + title );
@@ -299,9 +232,10 @@ var FN02 = function( d ){
       }
    ],
 */
-//-----------------------------------------------------------------;
-// 페이스북 광고통계
-//-----------------------------------------------------------------;
+
+/*
+ * 페이스북 광고통계
+ */
 var FN03 = function( d ){
 	var title = "페이스북 광고통계"
 	console.log( '[S] - FN03 - ' + title );
@@ -312,7 +246,7 @@ var FN03 = function( d ){
 		`
 	r += titleHtml;
 	r += "<table id='monthly_facebook_stastics'>\n";
-	r += "<thead>\n<tr>\n"	
+	r += "<thead>\n<tr>\n";
 	
 	var headers = [ "도달 (명)", "노출 수 (회)", "페이지 좋아요", "게시물 참여(번)", "게시물 댓글 (개)" ];
 
@@ -320,18 +254,17 @@ var FN03 = function( d ){
 
 	headers.forEach(function(d){
 		r += "<th style='width:" + tdWidth + "%;'>" + d + "</th>\n";	
-	})
-	
+	});
 
-	r += "</tr>\n</thead>\n<tbody>\n"
-	r += "<tr>\n"
+	r += "</tr>\n</thead>\n<tbody>\n";
+	r += "<tr>\n";
 
 	headers.forEach(function(item){
 		r += "<td style='text-align:center;'>" + d[ 0 ][ item ] + " 건</td>\n";	
 	})
 		
 
-	r += "</tr>\n"
+	r += "</tr>\n";
 	r += "</tbody>\n</table>\n";
 
 	console.log( '[E] - FN03 - ' + title );
@@ -363,11 +296,11 @@ var FN03 = function( d ){
       ],
 */
 
-//-----------------------------------------------------------------;
-// 페이스북 지역별 통계 자료 - 왼쪽
-//-----------------------------------------------------------------;
+/*
+ * 페이스북 지역별 통계 자료 - 왼쪽
+ */
 var FN04_01 = function( d ){
-	var title = "페이스북 지역별 통계 자료 - 왼쪽"
+	var title = "페이스북 지역별 통계 자료 - 왼쪽";
 	console.log( '  [S] - FN04_01 - ' + title );
 	
 	var r = "";
@@ -376,7 +309,7 @@ var FN04_01 = function( d ){
 //		`
 //	r += titleHtml;
 	r += "<table id='facebook_location'>\n";
-	r += "<thead>\n<tr>\n"	
+	r += "<thead>\n<tr>\n";
 	
 	var headers = [ "도시", "도달", "노출" ];
 
@@ -384,24 +317,24 @@ var FN04_01 = function( d ){
 
 	headers.forEach(function(d){
 		r += "<th style='width:" + tdWidth + "%;'>" + d + "</th>\n";	
-	})
+	});
 	
 
-	r += "</tr>\n</thead>\n"
-	r += "<tbody>\n"
+	r += "</tr>\n</thead>\n";
+	r += "<tbody>\n";
 
 	var i = 1,iLen = d.length,io;
 	for(;i<iLen;++i){
 		io = d[ i ]
 		if( i == 0 ||  ( i + 2 ) % 2 == 0 )
 		{
-			r += "<tr>\n"
+			r += "<tr>\n";
 			
 			r += "<td style='background-color:#fff;color:#000;padding:5px;min-height:40px;'>" + io[ 0 ][ "f" ] + "</td>";
 			r += "<td style='background-color:#fff;color:#000;padding:5px;border-top:1px solid #ccc;'>" + io[ 1 ] + "</td>";
 			r += "<td style='background-color:#fff;color:#000;padding:5px;'>" + io[ 2 ] + "</td>";
 
-			r += "</tr>\n"	
+			r += "</tr>\n";
 		}
 	}
 	r += "</tbody>\n</table>\n";
@@ -410,11 +343,11 @@ var FN04_01 = function( d ){
 	return r;
 }
 
-//-----------------------------------------------------------------;
-// 페이스북 지역별 통계 자료 - 오른쪽
-//-----------------------------------------------------------------;
+/*
+ * 페이스북 지역별 통계 자료 - 오른쪽
+ */
 var FN04_02 = function( d ){
-	var title = "페이스북 지역별 통계 자료 - 오른쪽"
+	var title = "페이스북 지역별 통계 자료 - 오른쪽";
 	console.log( '  [S] - FN04_02 - ' + title );
 	
 	var r = "";
@@ -423,7 +356,7 @@ var FN04_02 = function( d ){
 //		`
 //	r += titleHtml;
 	r += "<table id='facebook_location'>\n";
-	r += "<thead>\n<tr>\n"	
+	r += "<thead>\n<tr>\n";
 	
 	var headers = [ "도시", "도달", "노출" ];
 
@@ -431,24 +364,24 @@ var FN04_02 = function( d ){
 
 	headers.forEach(function(d){
 		r += "<th style='width:" + tdWidth + "%;'>" + d + "</th>\n";	
-	})
+	});
 	
 
-	r += "</tr>\n</thead>\n"
-	r += "<tbody>\n"
+	r += "</tr>\n</thead>\n";
+	r += "<tbody>\n";
 
 	var i = 1,iLen = d.length,io;
 	for(;i<iLen;++i){
-		io = d[ i ]
+		io = d[ i ];
 		if( i == 1 ||  ( i + 2 ) % 2 != 0 )
 		{
-			r += "<tr>\n"
+			r += "<tr>\n";
 			
 			r += "<td style='background-color:#fff;color:#000;padding:5px;min-height:40px;'>" + io[ 0 ][ "f" ] + "</td>";
 			r += "<td style='background-color:#fff;color:#000;padding:5px;border-top:1px solid #ccc;'>" + io[ 1 ] + "</td>";
 			r += "<td style='background-color:#fff;color:#000;padding:5px;'>" + io[ 2 ] + "</td>";
 
-			r += "</tr>\n"	
+			r += "</tr>\n";
 		}
 	}
 	r += "</tbody>\n</table>\n";
@@ -458,25 +391,25 @@ var FN04_02 = function( d ){
 }
 
 
-//-----------------------------------------------------------------;
-// 페이스북 지역별 통계 자료
-//-----------------------------------------------------------------;
+/*
+ * 페이스북 지역별 통계 자료
+ */
 var FN04 = function( d ){
-	var title = "페이스북 지역별 통계 자료"
+	var title = "페이스북 지역별 통계 자료";
 	console.log( '[S] - FN04 - ' + title );
 	
 	var r = "";
 	var titleHtml = `
 			<div class="align_center pad_20"><h2>${title}</h2></div>
-		`
+		`;
 	r += titleHtml;
 	r += "<table><tr>";
-	r += "<td>" + FN04_01( d ) + "</td>"
-	r += "<td>" + FN04_02( d ) + "</td>"
-	r += "</tr></table>"
+	r += "<td>" + FN04_01( d ) + "</td>";
+	r += "<td>" + FN04_02( d ) + "</td>";
+	r += "</tr></table>";
 	console.log( '[E] - FN04 - ' + title );
 	return r;
-}
+};
 
 /*
       "리뷰":[
@@ -497,11 +430,11 @@ var FN04 = function( d ){
 */
 
 
-//-----------------------------------------------------------------;
-// KOLS
-//-----------------------------------------------------------------;
+/*
+ * KOLs.
+ */
 var FN05 = function( d ){
-	var title = "KOLS"
+	var title = "KOLS";
 	console.log( '[S] - FN05 - ' + title );
 	
 	var r = "";
@@ -514,15 +447,15 @@ var FN05 = function( d ){
 
 	var titleHtml = `
 		<div class="align_center pad_20"><h2>${title}</h2></div>
-	`
+	`;
 	r += titleHtml;
 	r += "<table id='kols'>\n";
-	r += "<thead>\n<tr>\n"
+	r += "<thead>\n<tr>\n";
 	
 	var headers = [ "이름", "이미지", "성별", "구분", "팔로워", "비고" ];
 		headers.forEach(function(d){ r += "<th>" + d + "</th>\n"; });
 	
-	r += "</tr>\n</thead>\n<tbody>\n"
+	r += "</tr>\n</thead>\n<tbody>\n";
 	
 	var i = 0,iLen = d.length,io;
 	for(;i<iLen;++i){
@@ -548,45 +481,46 @@ var FN05 = function( d ){
 		if( io[ "비고" ] != ""  )  r += "<td>" + io[ "비고" ] + "</td>\n";
 		else r += "<td></td>\n";
 
-		r += "</tr>\n"
+		r += "</tr>\n";
 
-		r += "<tr>\n"
-		r += "<td>\n"
-		r += "유튜브"
-		r += "</td>\n"
-		r += "<td colspan='8'>\n"
-		r += io[ "유튜브" ]
-		r += "</td>\n"
-		r += "</tr>\n"
+		r += "<tr>\n";
+		r += "<td>\n";
+		r += "유튜브";
+		r += "</td>\n";
+		r += "<td colspan='8'>\n";
+		r += io[ "유튜브" ];
+		r += "</td>\n";
+		r += "</tr>\n";
 
-		r += "<tr>\n"
-		r += "<td>\n"
-		r += "페이스북"
-		r += "</td>\n"
-		r += "<td colspan='8'>\n"
-		r += io[ "페이스북" ]
-		r += "</td>\n"
-		r += "</tr>\n"
+		r += "<tr>\n";
+		r += "<td>\n";
+		r += "페이스북";
+		r += "</td>\n";
+		r += "<td colspan='8'>\n";
+		r += io[ "페이스북" ];
+		r += "</td>\n";
+		r += "</tr>\n";
 
-		r += "<tr style='border-bottom: 2px solid #000;'>\n"
-		r += "<td>\n"
-		r += "인스타그램"
-		r += "</td>\n"
-		r += "<td colspan='8'>\n"
-		r += io[ "인스타그램" ]
-		r += "</td>\n"
-		r += "</tr>\n"
+		r += "<tr style='border-bottom: 2px solid #000;'>\n";
+		r += "<td>\n";
+		r += "인스타그램";
+		r += "</td>\n";
+		r += "<td colspan='8'>\n";
+		r += io[ "인스타그램" ];
+		r += "</td>\n";
+		r += "</tr>\n";
 			
 	}
 	r += "</tbody>\n</table>\n";
 
 	console.log( '[E] - FN05 - ' + title );
 	return r;
-}
+};
 
-//-----------------------------------------------------------------;
-// insight
-//-----------------------------------------------------------------;
+
+/*
+ * insight
+ */
 var FN06 = function( d ){
 	var title = "insight"
 	console.log( '[S] - FN06 - ' + title );
@@ -617,11 +551,11 @@ var FN06 = function( d ){
 	r += "</table>"
 	console.log( '[E] - FN06 - ' + title );
 	return r;
-}
+};
 
-//-----------------------------------------------------------------;
-// imgTag삽입
-//-----------------------------------------------------------------;
+/*
+ * imgTag삽입
+ */
 var FN07_00 = function( d ){
 	var title = "imgTag삽입"
 	console.log( '[S] - FN07 - ' + title );
@@ -631,16 +565,16 @@ var FN07_00 = function( d ){
 	for(;i<iLen;++i){
 		io = d[ i ];
 		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + io + ".png";
-		r += "<div style='padding : 50px;'><img src='" +  newPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm + "'></div>\n"
+		r += "<div style='padding : 50px;'><img src='" +  global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm + "'></div>\n"
 	}
 	
 	console.log( '[E] - FN07 - ' + title );
 	return r;
-}
+};
 
-//-----------------------------------------------------------------;
-// imgTag삽입
-//-----------------------------------------------------------------;
+/*
+ * imgTag삽입
+ */
 var FN07_01 = function( d ){
 	var title = "imgTag삽입"
 	console.log( '[S] - FN07 - ' + title );
@@ -657,9 +591,9 @@ var FN07_01 = function( d ){
 
 		r += "<tr>\n"
 		var fileNm00 = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + io + ".png";
-		r += "<td style='padding : 10px;text-align:center;'><img src='" +  newPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm00 + "' width='500'></td>\n"
+		r += "<td style='padding : 10px;text-align:center;'><img src='" +  global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm00 + "' width='500'></td>\n"
 		var fileNm01 = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + i0o + ".png";
-		r += "<td style='padding : 10px;text-align:center;'><img src='" +  newPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm01 + "' width='500'></td>\n"
+		r += "<td style='padding : 10px;text-align:center;'><img src='" +  global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm01 + "' width='500'></td>\n"
 
 		r += "</tr>\n"
 		++i;
@@ -669,11 +603,11 @@ var FN07_01 = function( d ){
 	
 	console.log( '[E] - FN07 - ' + title );
 	return r;
-}
+};
 
-//-----------------------------------------------------------------;
-// 구글광고 통계
-//-----------------------------------------------------------------;
+/*
+ * 구글광고 통계
+ */
 var FN08 = function( d ){
 	var title = "구글광고 통계"
 	console.log( '[S] - FN08 - ' + title );
@@ -723,7 +657,7 @@ var FN08 = function( d ){
 
 	console.log( '[E] - FN08 - ' + title );
 	return r;
-}
+};
 
 /*
  *
@@ -731,7 +665,61 @@ var FN08 = function( d ){
 var pad = function(n, width){
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-}
+};
+
+//-----------------------------------------------------------------;
+// LOGIC;
+//-----------------------------------------------------------------;
+
+// 이미지이동
+(function(){
+	
+	fileNms_A.forEach(function(item){
+		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + item + ".png";
+		
+		var brandFolderPath = global.CONST.config.curPath + global.CONST.config.brandNm + "/";
+		var targetMonthFolderPath = brandFolderPath + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/"
+		
+		if( !fs.existsSync( brandFolderPath ) )
+		{
+			fs.mkdirSync( brandFolderPath, { recursive: true });
+		}
+		if( !fs.existsSync( targetMonthFolderPath ) )
+		{
+			fs.mkdirSync (targetMonthFolderPath, { recursive: true });
+		}
+		var old = oldPath + fileNm;
+		
+		if( fs.existsSync( old ) )
+		{	
+			if( item == "chartdiv00" || item == "chartdiv01" || item == "chartdiv02" || item == "chartdiv03")
+			{
+				fileNms_O.facebook_age_pie.isExist = true;
+				fileNms_O.facebook_age_pie.data.push( item )
+			}
+			else if( item == "chartdiv04" )
+			{
+				fileNms_O.facebook_time_bar.isExist = true;
+				fileNms_O.facebook_time_bar.data.push( item )
+			}
+			else if( item == "chartdiv13" || item == "chartdiv14" )
+			{
+				fileNms_O.google_time_bar.isExist = true;
+				fileNms_O.google_time_bar.data.push( item )
+			}
+			else if( item == "facebook_location" )
+			{
+				fileNms_O.facebook_location_map.isExist = true;
+				fileNms_O.facebook_location_map.data.push( item )
+			}
+
+			var dest = global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm;
+			fs.copyFileSync( old, dest );		
+		}	
+	})
+	
+})();
+
 
 /*
 var fileNms_O = {
@@ -786,7 +774,7 @@ global.CONST.config.targetMonth = "10";
 var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.statistic_monthly ) )
 				.replace( "<!=TARGET_BRAND=!>", bramdNms[ global.CONST.config.brandNm ].text )
 				.replace( "<!=TARGET_YEAR=!>", global.CONST.config.targetYear )
-				.replace( "<!=TARGET_MONTH=!>", pad( Number( global.CONST.config.targetMonth ),2 ) )
+				.replace( "<!=TARGET_MONTH=!>", pad( global.CONST.config.targetMonth, 2 ) )
 				.replace( "<!=INSIGHT=!>", FN06( _o_data.insight[0] ) )
 				.replace( "<!=MARKETING_LIST=!>", FN01( _o_data.ads_list ) )
 				.replace( "<!=MARKETING_LIST_TOTAL=!>", FN02( _o_data.ads_list ) )
@@ -798,7 +786,5 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimePie )
 				.replace( "<!=MONTHLY_GOOGLE_STASTICS=!>", FN08( _o_data.google_total ) )
 				.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
-
-
 
 fs.writeFileSync( savePath + saveFileNm , _tString,{ flag : 'w' } )
