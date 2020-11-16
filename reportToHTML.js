@@ -10,28 +10,38 @@ var fs = require('fs');
 global.CONST = {};
 global.CONST.config = {};
 
-//global.CONST.config.brandNm = "varihope";
-global.CONST.config.brandNm = "wellderma";
+global.CONST.config.brandNm = "varihope";
+//global.CONST.config.brandNm = "wellderma";
+//global.CONST.config.brandNm = "aheads";
 global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "09";
+global.CONST.config.targetMonth = "8";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
 //-----------------------------------------------------------------;
 
+/*
+ *
+ */
+var pad = function(n, width){
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+};
+
+
 var reportSourcePath = "D:/workspace_piel/marketing_report/brand/" + global.CONST.config.brandNm + "/"
-var reportSourcefileNm = global.CONST.config.targetYear + global.CONST.config.targetMonth + "_data.json"
+var reportSourcefileNm = global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "_data.json"
 var reportSourceThtmlFileNm = "./report.thtml";
 var reportSource = fs.readFileSync( reportSourceThtmlFileNm ).toString();
 var _data = fs.readFileSync( reportSourcePath + reportSourcefileNm ).toString();
 var _o_data = JSON.parse( _data );
 
 var bramdNms = {
-	varihop : { text : "VARI:HOPE", imgPath : "" }
-	, wellderma : { text : "WELLDERMA", imgPath : "" }
-	, ahead : { text : "AHEADS", imgPath : "" }
-	, ash7 : { text : "ash7", imgPath : "" }
-	, bxxxy : { text : "bxxxy", imgPath : "" }
+	varihope : { text : "VARI:HOPE", imgPath : "https://cdn.imweb.me/thumbnail/20200626/dcfd77a936797.png" }
+	, wellderma : { text : "WELLDERMA", imgPath : "https://cdn.imweb.me/thumbnail/20200824/0cab2a2be8769.png" }
+	, aheads : { text : "AHEADS", imgPath : "https://cdn.imweb.me/thumbnail/20201012/6c72b00ac8ea4.png" }
+	, ash7 : { text : "ash7", imgPath : "https://cdn.imweb.me/thumbnail/20201103/a39576bf72e6c.jpg" }
+	, bxxxy : { text : "bxxxy", imgPath : "https://cdn.imweb.me/thumbnail/20201103/28686b8c52c16.jpg" }
 };
 
 var fileNms_A = [
@@ -55,8 +65,8 @@ var fileNms_O = {
 var oldPath = "C:/Users/Administrator/Downloads/";
 
 
-var savePath = global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/";
-var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + ".html"
+var savePath = global.CONST.config.curPath + "report/" + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/";
+var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + ".html"
 
 //-----------------------------------------------------------------;
 // FUNCTIONS;
@@ -564,8 +574,8 @@ var FN07_00 = function( d ){
 	var i = 0,iLen = d.length,io;
 	for(;i<iLen;++i){
 		io = d[ i ];
-		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + io + ".png";
-		r += "<div style='padding : 50px;'><img src='" +  global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm + "'></div>\n"
+		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "_" + io + ".png";
+		r += "<div style='padding : 50px;'><img src='" +  global.CONST.config.curPath + "report/"  + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm + "'></div>\n"
 	}
 	
 	console.log( '[E] - FN07 - ' + title );
@@ -590,10 +600,10 @@ var FN07_01 = function( d ){
 		i0o = d[ i0 ]
 
 		r += "<tr>\n"
-		var fileNm00 = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + io + ".png";
-		r += "<td style='padding : 10px;text-align:center;'><img src='" +  global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm00 + "' width='500'></td>\n"
-		var fileNm01 = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + i0o + ".png";
-		r += "<td style='padding : 10px;text-align:center;'><img src='" +  global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm01 + "' width='500'></td>\n"
+		var fileNm00 = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "_" + io + ".png";
+		r += "<td style='padding : 10px;text-align:center;'><img src='" +  global.CONST.config.curPath + "report/" + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm00 + "' width='500'></td>\n"
+		var fileNm01 = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "_" + i0o + ".png";
+		r += "<td style='padding : 10px;text-align:center;'><img src='" +  global.CONST.config.curPath + "report/"  + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm01 + "' width='500'></td>\n"
 
 		r += "</tr>\n"
 		++i;
@@ -659,13 +669,6 @@ var FN08 = function( d ){
 	return r;
 };
 
-/*
- *
- */
-var pad = function(n, width){
-  n = n + '';
-  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-};
 
 //-----------------------------------------------------------------;
 // LOGIC;
@@ -675,11 +678,20 @@ var pad = function(n, width){
 (function(){
 	
 	fileNms_A.forEach(function(item){
-		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "_" + item + ".png";
+		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "_" + item + ".png";
 		
-		var brandFolderPath = global.CONST.config.curPath + global.CONST.config.brandNm + "/";
-		var targetMonthFolderPath = brandFolderPath + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/"
-		
+		var reportFolderPath = global.CONST.config.curPath + "report/";
+		var brandFolderPath = reportFolderPath + global.CONST.config.brandNm + "/";
+		var targetMonthFolderPath = brandFolderPath + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/"
+
+		if( !fs.existsSync( reportFolderPath ) )
+		{
+			fs.mkdirSync( reportFolderPath, { recursive: true });
+		}
+		if( !fs.existsSync( targetMonthFolderPath ) )
+		{
+			fs.mkdirSync (targetMonthFolderPath, { recursive: true });
+		}
 		if( !fs.existsSync( brandFolderPath ) )
 		{
 			fs.mkdirSync( brandFolderPath, { recursive: true });
@@ -713,7 +725,7 @@ var pad = function(n, width){
 				fileNms_O.facebook_location_map.data.push( item )
 			}
 
-			var dest = global.CONST.config.curPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + global.CONST.config.targetMonth + "/" + fileNm;
+			var dest = reportFolderPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm;
 			fs.copyFileSync( old, dest );		
 		}	
 	})
@@ -772,6 +784,7 @@ global.CONST.config.targetMonth = "10";
 
 */
 var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.statistic_monthly ) )
+				.replace( "<!=LOGO_URL=!>", bramdNms[ global.CONST.config.brandNm ].imgPath )
 				.replace( "<!=TARGET_BRAND=!>", bramdNms[ global.CONST.config.brandNm ].text )
 				.replace( "<!=TARGET_YEAR=!>", global.CONST.config.targetYear )
 				.replace( "<!=TARGET_MONTH=!>", pad( global.CONST.config.targetMonth, 2 ) )

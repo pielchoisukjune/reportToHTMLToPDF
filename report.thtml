@@ -62,13 +62,17 @@
 </style>
 <div style="width: 100%;height: 250mm;">
 	<div style="text-align:center;height:100px;line-height:100px;padding-top : 150px;">
-		<h1 style="font-size : 70px;"><!=TARGET_BRAND=!></h1>
+		<img src="<!=LOGO_URL=!>">
+	</div>	
+	<div style="text-align:center;height:100px;line-height:100px;padding-top : 150px;">
+		<h1 style="font-size : 70px;"></h1>
+	</div>
+	<div style="text-align:center;height:100px;line-height:100px;padding-bottom : 150px;">
+		<h2><!=TARGET_BRAND=!> Vietnam Marketing Report By PIEL.</h2>
+<h1><!=TARGET_YEAR=!>.<!=TARGET_MONTH=!></h1>
 	</div>
 	<div style="text-align:center;height:100px;line-height:100px;">
-		<h1><!=TARGET_YEAR=!>.<!=TARGET_MONTH=!></h1>
-	</div>
-	<div style="text-align:center;height:100px;line-height:100px;padding-bottom : 300px;">
-		<h1>Marketing Report.</h1>
+		
 	</div>
 </div>
 <div style="padding : 0px 0px;"><!=MONTHLY_STATSTIC=!></div>
