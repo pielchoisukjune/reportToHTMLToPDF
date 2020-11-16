@@ -13,7 +13,7 @@ global.CONST.config = {};
 //global.CONST.config.brandNm = "varihope";
 global.CONST.config.brandNm = "wellderma";
 global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "10";
+global.CONST.config.targetMonth = "09";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
@@ -540,7 +540,7 @@ var FN06 = function( d ){
 		if( so != "" && s != "월" ){
 		
 			r += "<tr>";
-			r += "<td>" + s.replace(/\r/gi,"<br>").replace(/\n/gi,"<br>").replace(/\r\n/gi,"<br>") + "</td>"
+			r += "<td style='background-color:#000;color:#fff;text-align:center;'>" + s.replace(/\r/gi,"<br>").replace(/\n/gi,"<br>").replace(/\r\n/gi,"<br>") + "</td>"
 			r += "<td>" + so.replace(/\r/gi,"<br>").replace(/\n/gi,"<br>").replace(/\r\n/gi,"<br>") + "</td>"
 			r += "</tr>";
 
