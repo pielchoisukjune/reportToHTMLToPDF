@@ -10,11 +10,11 @@ var fs = require('fs');
 global.CONST = {};
 global.CONST.config = {};
 
-global.CONST.config.brandNm = "varihope";
-//global.CONST.config.brandNm = "wellderma";
+//global.CONST.config.brandNm = "varihope";
+global.CONST.config.brandNm = "wellderma";
 //global.CONST.config.brandNm = "aheads";
 global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "8";
+global.CONST.config.targetMonth = "9";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
@@ -37,11 +37,31 @@ var _data = fs.readFileSync( reportSourcePath + reportSourcefileNm ).toString();
 var _o_data = JSON.parse( _data );
 
 var bramdNms = {
-	varihope : { text : "VARI:HOPE", imgPath : "https://cdn.imweb.me/thumbnail/20200626/dcfd77a936797.png" }
-	, wellderma : { text : "WELLDERMA", imgPath : "https://cdn.imweb.me/thumbnail/20200824/0cab2a2be8769.png" }
-	, aheads : { text : "AHEADS", imgPath : "https://cdn.imweb.me/thumbnail/20201012/6c72b00ac8ea4.png" }
-	, ash7 : { text : "ash7", imgPath : "https://cdn.imweb.me/thumbnail/20201103/a39576bf72e6c.jpg" }
-	, bxxxy : { text : "bxxxy", imgPath : "https://cdn.imweb.me/thumbnail/20201103/28686b8c52c16.jpg" }
+	varihope : { 
+		text : "VARI:HOPE"
+		, imgPath : "https://cdn.imweb.me/thumbnail/20200626/dcfd77a936797.png" 
+		, contract_range : [ 6,7,8,9,10,11,12 ]
+	}
+	, wellderma : { 
+		text : "WELLDERMA"
+		, imgPath : "https://cdn.imweb.me/thumbnail/20200824/0cab2a2be8769.png"
+		, contract_range : [ 9,10,11,12,1,2 ]
+	}
+	, aheads : { 
+		text : "AHEADS"
+		, imgPath : "https://cdn.imweb.me/thumbnail/20201012/6c72b00ac8ea4.png"
+		, contract_range : [ 10,11,12,1,2,3 ]
+	}
+	, ash7 : {
+		text : "ash7"
+		, imgPath : "https://cdn.imweb.me/thumbnail/20201103/a39576bf72e6c.jpg"
+		, contract_range : [ 11,12,1,2,3,4 ]
+	}
+	, bxxxy : {
+		text : "bxxxy"
+		, imgPath : "https://cdn.imweb.me/thumbnail/20201103/28686b8c52c16.jpg" 
+		, contract_range : [ 11,12,1,2,3,4 ]
+	}
 };
 
 var fileNms_A = [
@@ -50,16 +70,23 @@ var fileNms_A = [
 	, "chartdiv02"
 	, "chartdiv03"
 	, "chartdiv04"
+	, "chartdiv07"
+	, "chartdiv08"
+	, "chartdiv09"
+	, "chartdiv10"
+	, "chartdiv11"
+	, "chartdiv12"
 	, "chartdiv13"
 	, "chartdiv14"
 	, "facebook_location"
 ];
 
 var fileNms_O = {
-	facebook_age_pie : { isExist : false, data : []	}
+      facebook_age_pie : { isExist : false, data : []	}
 	, facebook_time_bar : { isExist : false, data : [] }
-	, google_time_bar : { isExist : false, data : [] }
 	, facebook_location_map : { isExist : false, data : [] }
+	, google_time_bar : { isExist : false, data : [] }
+	, google_age_pie : { isExist : false, data : [] }
 };
 
 var oldPath = "C:/Users/Administrator/Downloads/";
@@ -96,8 +123,24 @@ var FN00 = function( d ){
 		}
 		else
 		{
-			_html += "<tr>\n"
-			io.forEach(function(d){ _html += "<td>" + d + "</td>\n"; });
+			_html += "<tr>\n";
+			var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( Number( global.CONST.config.targetMonth ) );
+			var cnt = 0
+			io.forEach(function(d){ 
+				
+
+				if( ( cnt - 2 ) <= chk_curMonth )
+				{
+					_html += "<td>" + d + "</td>\n";
+				}
+				else
+				{
+					_html += "<td></td>\n";
+				}
+				
+				++cnt;
+
+			});
 			_html += "</tr>\n"
 			
 		}
@@ -585,11 +628,19 @@ var FN07_00 = function( d ){
 /*
  * imgTag삽입
  */
-var FN07_01 = function( d ){
+var FN07_01 = function( d, subject ){
 	var title = "imgTag삽입"
 	console.log( '[S] - FN07 - ' + title );
 	
 	var r = "";
+	
+	if( subject )
+	{
+		var titleHtml = `
+			<div class="align_center pad_20"><h2>${subject}</h2></div>
+		`
+		r += titleHtml;
+	}
 	
 	r += "<table id='facebook_age' style='margin-top:50px;border:0px solid #fff!important;'>\n";
 	var i = 0,iLen = d.length,io,i0o;
@@ -669,6 +720,64 @@ var FN08 = function( d ){
 	return r;
 };
 
+/*
+ * Goolge Top SEO ADS.
+ * <!=GOOGLE_TOP_SEO=!>
+ */
+var FN09 = function( p ){
+	var title = "Goolge Top SEO ADS"
+	console.log( '[S] - FN09 - ' + title );
+	
+	var r = "";
+	var d = p[ "Google Top SEO" ];
+	if( d.length == 0 )
+	{
+		console.log( '    - FN09 - d 가 없음!');
+		console.log( '[E] - FN09 - ' + title );
+		return r;
+	}
+	
+	var titleHtml = `
+		<div class="align_center pad_20"><h2>${title}</h2></div>
+	`
+	r += titleHtml;
+	r += "<table id='googe_top_seo'>\n";
+	r += "<thead>\n<tr>\n";
+	
+	var headers = [ "구분", "타입", "이미지","업데이트날짜", "제목", "조회건수" ];
+		headers.forEach(function( item ){ r += "<th>" + item + "</th>\n"; });
+	
+	r += "</tr>\n</thead>\n<tbody>\n"
+	
+	var i = 0,iLen = d.length,io;
+	for(;i<iLen;++i){
+		io = d[ i ];
+
+		r += "<tr>\n"
+		headers.forEach(function( item ){
+			if( item == "이미지" ) return r += "<td><img src='" + io[ item ] + "' width='200'></td>\n";
+			if( io[ item ] && io[ item ] != "0"  ) return r += "<td>" + io[ item ] + "</td>\n";
+			return r += "<td></td>\n";
+		});
+		r += "</tr>\n"
+
+		r += "<tr style='border-bottom: 2px solid #000;'>\n"
+		r += "<td colspan='2'>\n"
+		r += "해당링크"
+		r += "</td>\n"
+		r += "<td colspan='7' style='word-break: break-all;'>\n"
+		r += io[ "해당링크" ]
+		r += "</td>\n"
+		r += "</tr>\n"
+			
+	}
+	r += "</tbody>\n</table>\n";
+
+
+	console.log( '[E] - FN09 - ' + title );
+	return r;
+};
+
 
 //-----------------------------------------------------------------;
 // LOGIC;
@@ -724,6 +833,11 @@ var FN08 = function( d ){
 				fileNms_O.facebook_location_map.isExist = true;
 				fileNms_O.facebook_location_map.data.push( item )
 			}
+			else if( item == "chartdiv07" || item == "chartdiv08" || item == "chartdiv09" || item == "chartdiv10" || item == "chartdiv11" || item == "chartdiv12" )
+			{
+				fileNms_O.google_age_pie.isExist = true;
+				fileNms_O.google_age_pie.data.push( item )
+			}
 
 			var dest = reportFolderPath + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm;
 			fs.copyFileSync( old, dest );		
@@ -770,12 +884,14 @@ var fileNms_O = {
 var _strFacebookAgePie = "";
 var _strFacebookTimeBar = "";
 var _strFacebookLoctionMap = "";
-var _strGoogleTimePie = "";
+var _strGoogleTimeBar = "";
+var _strGoogleAgePie = "";
 
 if( fileNms_O.facebook_age_pie.isExist ) _strFacebookAgePie = FN07_01( fileNms_O.facebook_age_pie.data );
 if( fileNms_O.facebook_time_bar.isExist ) _strFacebookTimeBar = FN07_00( fileNms_O.facebook_time_bar.data );
 if( fileNms_O.facebook_location_map.isExist ) _strFacebookLoctionMap = FN07_00( fileNms_O.facebook_location_map.data );
-if( fileNms_O.google_time_bar.isExist ) _strGoogleTimePie = FN07_00( fileNms_O.google_time_bar.data );
+if( fileNms_O.google_time_bar.isExist ) _strGoogleTimeBar = FN07_00( fileNms_O.google_time_bar.data );
+if( fileNms_O.google_age_pie.isExist ) _strGoogleAgePie = FN07_01( fileNms_O.google_age_pie.data, "구글 광고 연령별 통계" );
 
 /*
 global.CONST.config.brandNm = "wellderma";
@@ -783,6 +899,10 @@ global.CONST.config.targetYear = "2020";
 global.CONST.config.targetMonth = "10";
 
 */
+
+var _strGoogleTopSeo = "";
+if( _o_data.google_seo_list ) _strGoogleTopSeo = FN09( _o_data.google_seo_list ) 
+
 var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.statistic_monthly ) )
 				.replace( "<!=LOGO_URL=!>", bramdNms[ global.CONST.config.brandNm ].imgPath )
 				.replace( "<!=TARGET_BRAND=!>", bramdNms[ global.CONST.config.brandNm ].text )
@@ -796,8 +916,10 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				.replace( "<!=FACEBOOK_PIE_CHART=!>", _strFacebookAgePie )
 				.replace( "<!=FACEBOOK_BAR_CHART=!>", _strFacebookTimeBar )
 				.replace( "<!=FACEBOOK_LOCATION_CHART=!>", _strFacebookLoctionMap )
-				.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimePie )
+				.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimeBar )
 				.replace( "<!=MONTHLY_GOOGLE_STASTICS=!>", FN08( _o_data.google_total ) )
+				.replace( "<!=GOOGLE_AGE_PIE=!>", _strGoogleAgePie )
+				.replace( "<!=GOOGLE_TOP_SEO=!>", _strGoogleTopSeo )
 				.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
 
 fs.writeFileSync( savePath + saveFileNm , _tString,{ flag : 'w' } )
