@@ -2,7 +2,9 @@
 // REQUIRES;
 //-----------------------------------------------------------------;
 var fs = require('fs');
-
+var execSync = require('child_process').execSync;
+var iconv = require( "iconv-lite" );
+var spawn = require('child_process').spawn;
 //-----------------------------------------------------------------;
 // CONST;
 //-----------------------------------------------------------------;
@@ -14,11 +16,25 @@ global.CONST.config = {};
 global.CONST.config.brandNm = "wellderma";
 //global.CONST.config.brandNm = "aheads";
 global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "9";
+global.CONST.config.targetMonth = "10";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
 //-----------------------------------------------------------------;
+//var a = execSync( 'start test.bat' );
+//console.log( iconv.decode( a, 'EUC-KR').toString() )
+
+//var exec = require('child_process').exec;
+// 
+//exec(  'start test.bat', function( err,stdout, stderr ){
+//	if( err ) 
+//	{
+//		console.log('')
+//		process.exit()
+//	}
+//	console.log( stdout )
+//	process.exit();
+//})
 
 /*
  *
@@ -90,10 +106,9 @@ var fileNms_O = {
 };
 
 var oldPath = "C:/Users/Administrator/Downloads/";
-
-
 var savePath = global.CONST.config.curPath + "report/" + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/";
-var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + ".html"
+var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 );
+var desktopPath = "C:\\Users\\Administrator\\Desktop\\";
 
 //-----------------------------------------------------------------;
 // FUNCTIONS;
@@ -778,6 +793,57 @@ var FN09 = function( p ){
 	return r;
 };
 
+/*
+ * makePdf
+ */
+var makeHtmlToPdf = function( oldPath, savePath, saveFileNm, cbFunction ){
+
+	var saveFilePathNmHTML = savePath + saveFileNm + ".html"
+	var oldFilePathNmPDF = oldPath + saveFileNm + ".html.pdf"
+//	var saveFilePathNmPDF = savePath + saveFileNm + ".pdf"
+
+	var bat = spawn('cmd.exe', ['/c', 'savePdf.bat ' + saveFilePathNmHTML.replace(/\//gi,"\\")]);
+		bat.stdout.on('data', function(data){ 
+			console.log( iconv.decode( data, "euc-kr") ); 
+		});
+		bat.stderr.on('data', function(data){ 
+			console.log( iconv.decode( data, "euc-kr") )
+		});
+		bat.on('exit', function(code){ 
+			console.log(`Child exited with code ${code}`); 
+		});
+
+	setTimeout(function(){
+		var bat00 = spawn('cmd.exe', ['/c', 'taskkill /F /IM chrome.exe /T']);
+		bat00.stdout.on('data', function(data){ 
+			console.log( iconv.decode( data, "euc-kr") ); 
+		});
+		bat00.stderr.on('data', function(data){ 
+			console.log( iconv.decode( data, "euc-kr") )
+		});
+		bat00.on('exit', function(code){ 
+			console.log( "파일이동실행" )
+			cbFunction( oldFilePathNmPDF, savePath, saveFileNm + ".html.pdf" )
+			console.log(`Child exited with code ${code}`); });
+	},10000)
+};
+
+/*
+ * move file dest folder.
+ */
+var movePdfToFolder = function( oldPath, newPath, oldFilePathNmPDF ){
+
+	//renameAndMove.bat C:\Users\Administrator\Desktop\report_wellderma_202010.html.pdf D:\workspace_piel\reportToHTMLToPDF\report\wellderma\202010 report_wellderma_202010.html.pdf
+	var bat = spawn('cmd.exe', ['/c', 'renameAndMove.bat ' + oldPath.replace(/\//gi,"\\") + " " + newPath.replace(/\//gi,"\\") + " " + oldFilePathNmPDF ]);
+		bat.stdout.on('data', function(data){ 
+			console.log( iconv.decode( data, "euc-kr") ); 
+		});
+		bat.stderr.on('data', function(data){ 
+			console.log( iconv.decode( data, "euc-kr") )
+		});
+	bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+};
+
 
 //-----------------------------------------------------------------;
 // LOGIC;
@@ -922,4 +988,14 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				.replace( "<!=GOOGLE_TOP_SEO=!>", _strGoogleTopSeo )
 				.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
 
-fs.writeFileSync( savePath + saveFileNm , _tString,{ flag : 'w' } )
+fs.writeFileSync( savePath + saveFileNm + ".html" , _tString,{ flag : 'w' } )
+
+
+/*
+var oldPath = "C:/Users/Administrator/Downloads/";
+var savePath = global.CONST.config.curPath + "report/" + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/";
+var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 );
+
+*/
+makeHtmlToPdf( desktopPath, savePath, saveFileNm, movePdfToFolder );
+
