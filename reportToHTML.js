@@ -825,7 +825,7 @@ var makeHtmlToPdf = function( oldPath, savePath, saveFileNm, cbFunction ){
 			console.log( "파일이동실행" )
 			cbFunction( oldFilePathNmPDF, savePath, saveFileNm + ".html.pdf" )
 			console.log(`Child exited with code ${code}`); });
-	},10000)
+	},15000)
 };
 
 /*
