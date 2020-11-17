@@ -12,8 +12,8 @@ var spawn = require('child_process').spawn;
 global.CONST = {};
 global.CONST.config = {};
 
-//global.CONST.config.brandNm = "varihope";
-global.CONST.config.brandNm = "wellderma";
+global.CONST.config.brandNm = "varihope";
+//global.CONST.config.brandNm = "wellderma";
 //global.CONST.config.brandNm = "aheads";
 global.CONST.config.targetYear = "2020";
 global.CONST.config.targetMonth = "10";
