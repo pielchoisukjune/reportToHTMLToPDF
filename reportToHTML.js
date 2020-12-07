@@ -12,8 +12,8 @@ var spawn = require('child_process').spawn;
 global.CONST = {};
 global.CONST.config = {};
 
-global.CONST.config.brandNm = "varihope";
-//global.CONST.config.brandNm = "wellderma";
+//global.CONST.config.brandNm = "varihope";
+global.CONST.config.brandNm = "wellderma";
 //global.CONST.config.brandNm = "aheads";
 global.CONST.config.targetYear = "2020";
 global.CONST.config.targetMonth = "11";
@@ -825,7 +825,7 @@ var makeHtmlToPdf = function( oldPath, savePath, saveFileNm, cbFunction ){
 			console.log( "파일이동실행" )
 			cbFunction( oldFilePathNmPDF, savePath, saveFileNm + ".html.pdf" )
 			console.log(`Child exited with code ${code}`); });
-	},15000)
+	},30000)
 };
 
 /*
