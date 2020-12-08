@@ -12,9 +12,11 @@ var spawn = require('child_process').spawn;
 global.CONST = {};
 global.CONST.config = {};
 
-//global.CONST.config.brandNm = "varihope";
+global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "wellderma";
-global.CONST.config.brandNm = "aheads";
+//global.CONST.config.brandNm = "aheads";
+//global.CONST.config.brandNm = "ashseven";
+//global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2020";
 global.CONST.config.targetMonth = "11";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
@@ -68,8 +70,8 @@ var bramdNms = {
 		, imgPath : "https://cdn.imweb.me/thumbnail/20201012/6c72b00ac8ea4.png"
 		, contract_range : [ 10,11,12,1,2,3 ]
 	}
-	, ash7 : {
-		text : "ash7"
+	, ashseven : {
+		text : "ashseven"
 		, imgPath : "https://cdn.imweb.me/thumbnail/20201103/a39576bf72e6c.jpg"
 		, contract_range : [ 11,12,1,2,3,4 ]
 	}
