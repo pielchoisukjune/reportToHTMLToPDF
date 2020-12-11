@@ -18,7 +18,7 @@ global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "11";
+global.CONST.config.targetMonth = "10";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
