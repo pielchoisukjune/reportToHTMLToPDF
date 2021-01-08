@@ -13,8 +13,8 @@ global.CONST = {};
 global.CONST.config = {};
 
 //global.CONST.config.brandNm = "varihope";
-global.CONST.config.brandNm = "wellderma";
-//global.CONST.config.brandNm = "aheads";
+//global.CONST.config.brandNm = "wellderma";
+global.CONST.config.brandNm = "aheads";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2020";
@@ -635,7 +635,7 @@ var FN07_00 = function( d ){
 	for(;i<iLen;++i){
 		io = d[ i ];
 		var fileNm = global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "_" + io + ".png";
-		r += "<div style='padding : 50px;'><img src='" +  global.CONST.config.curPath + "report/"  + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm + "'></div>\n"
+		r += "<div style='padding : 50px;text-align:center;'><img src='" +  global.CONST.config.curPath + "report/"  + global.CONST.config.brandNm + "/" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 ) + "/" + fileNm + "'></div>\n"
 	}
 	
 	console.log( '[E] - FN07 - ' + title );
