@@ -18,7 +18,7 @@ global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "10";
+global.CONST.config.targetMonth = "12";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
@@ -999,5 +999,5 @@ var savePath = global.CONST.config.curPath + "report/" + global.CONST.config.bra
 var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 );
 
 */
-makeHtmlToPdf( desktopPath, savePath, saveFileNm, movePdfToFolder );
+//makeHtmlToPdf( desktopPath, savePath, saveFileNm, movePdfToFolder );
 
