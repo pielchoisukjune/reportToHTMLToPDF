@@ -12,8 +12,8 @@ var spawn = require('child_process').spawn;
 global.CONST = {};
 global.CONST.config = {};
 
-global.CONST.config.brandNm = "varihope";
-//global.CONST.config.brandNm = "wellderma";
+//global.CONST.config.brandNm = "varihope";
+global.CONST.config.brandNm = "wellderma";
 //global.CONST.config.brandNm = "aheads";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
@@ -999,5 +999,5 @@ var savePath = global.CONST.config.curPath + "report/" + global.CONST.config.bra
 var saveFileNm = "report_" + global.CONST.config.brandNm + "_" + global.CONST.config.targetYear + pad( global.CONST.config.targetMonth, 2 );
 
 */
-//makeHtmlToPdf( desktopPath, savePath, saveFileNm, movePdfToFolder );
+makeHtmlToPdf( desktopPath, savePath, saveFileNm, movePdfToFolder );
 
