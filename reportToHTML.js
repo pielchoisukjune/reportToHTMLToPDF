@@ -12,13 +12,13 @@ var spawn = require('child_process').spawn;
 global.CONST = {};
 global.CONST.config = {};
 
-//global.CONST.config.brandNm = "varihope";
+global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "wellderma";
-global.CONST.config.brandNm = "aheads";
+//global.CONST.config.brandNm = "aheads";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
-global.CONST.config.targetYear = "2020";
-global.CONST.config.targetMonth = "12";
+global.CONST.config.targetYear = "2021";
+global.CONST.config.targetMonth = "01";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
@@ -58,7 +58,7 @@ var bramdNms = {
 	varihope : { 
 		text : "VARI:HOPE"
 		, imgPath : "https://cdn.imweb.me/thumbnail/20200626/dcfd77a936797.png" 
-		, contract_range : [ 6,7,8,9,10,11,12 ]
+		, contract_range : [ 6,7,8,9,10,11,12,1,2,3 ]
 	}
 	, wellderma : { 
 		text : "WELLDERMA"
@@ -119,6 +119,7 @@ var desktopPath = "C:\\Users\\Administrator\\Desktop\\";
  *월간마케팅 현황
  */
 var FN00 = function( d ){
+	console.log( d )
 	var title = "월간마케팅 현황"
 	console.log( '[S] - FN00 - ' + title );
 	var i = 0,iLen = d.length,io;
@@ -979,11 +980,11 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				.replace( "<!=INSIGHT=!>", FN06( _o_data.insight[0] ) )
 				.replace( "<!=MARKETING_LIST=!>", FN01( _o_data.ads_list ) )
 				.replace( "<!=MARKETING_LIST_TOTAL=!>", FN02( _o_data.ads_list ) )
-				.replace( "<!=FACEBOOK_LOCATION=!>", FN04( _o_data.location_data ) )
+				//.replace( "<!=FACEBOOK_LOCATION=!>", FN04( _o_data.location_data ) )
 				.replace( "<!=MONTHLY_FACEBOOK_STASTICS=!>", FN03( _o_data.total ) )
-				.replace( "<!=FACEBOOK_PIE_CHART=!>", _strFacebookAgePie )
-				.replace( "<!=FACEBOOK_BAR_CHART=!>", _strFacebookTimeBar )
-				.replace( "<!=FACEBOOK_LOCATION_CHART=!>", _strFacebookLoctionMap )
+				//.replace( "<!=FACEBOOK_PIE_CHART=!>", _strFacebookAgePie )
+				//.replace( "<!=FACEBOOK_BAR_CHART=!>", _strFacebookTimeBar )
+				//.replace( "<!=FACEBOOK_LOCATION_CHART=!>", _strFacebookLoctionMap )
 				.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimeBar )
 				.replace( "<!=MONTHLY_GOOGLE_STASTICS=!>", FN08( _o_data.google_total ) )
 				.replace( "<!=GOOGLE_AGE_PIE=!>", _strGoogleAgePie )
