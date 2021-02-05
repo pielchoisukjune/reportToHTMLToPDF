@@ -13,8 +13,8 @@ global.CONST = {};
 global.CONST.config = {};
 
 //global.CONST.config.brandNm = "varihope";
-//global.CONST.config.brandNm = "wellderma";
-global.CONST.config.brandNm = "aheads";
+global.CONST.config.brandNm = "wellderma";
+//global.CONST.config.brandNm = "aheads";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2021";
@@ -985,10 +985,10 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				.replace( "<!=FACEBOOK_PIE_CHART=!>", _strFacebookAgePie )
 				.replace( "<!=FACEBOOK_BAR_CHART=!>", _strFacebookTimeBar )
 				.replace( "<!=FACEBOOK_LOCATION_CHART=!>", _strFacebookLoctionMap )
-				.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimeBar )
+				//.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimeBar )
 				.replace( "<!=MONTHLY_GOOGLE_STASTICS=!>", FN08( _o_data.google_total ) )
-				.replace( "<!=GOOGLE_AGE_PIE=!>", _strGoogleAgePie )
-				.replace( "<!=GOOGLE_TOP_SEO=!>", _strGoogleTopSeo )
+				//.replace( "<!=GOOGLE_AGE_PIE=!>", _strGoogleAgePie )
+				//.replace( "<!=GOOGLE_TOP_SEO=!>", _strGoogleTopSeo )
 				.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
 
 fs.writeFileSync( savePath + saveFileNm + ".html" , _tString,{ flag : 'w' } )
