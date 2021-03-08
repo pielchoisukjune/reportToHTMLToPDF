@@ -14,11 +14,11 @@ global.CONST.config = {};
 
 //global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "wellderma";
-//global.CONST.config.brandNm = "aheads";
+global.CONST.config.brandNm = "aheads";
 //global.CONST.config.brandNm = "ashseven";
-global.CONST.config.brandNm = "bxxxy";
+//global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2021";
-global.CONST.config.targetMonth = "01";
+global.CONST.config.targetMonth = "02";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
