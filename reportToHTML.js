@@ -12,9 +12,9 @@ var spawn = require('child_process').spawn;
 global.CONST = {};
 global.CONST.config = {};
 
-global.CONST.config.brandNm = "varihope";
+//global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "wellderma";
-//global.CONST.config.brandNm = "aheads";
+global.CONST.config.brandNm = "aheads";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2021";
@@ -60,7 +60,7 @@ var bramdNms = {
 		text : "VARI:HOPE"
 		, imgPath : "https://cdn.imweb.me/thumbnail/20200626/dcfd77a936797.png" 
 //		, contract_range : [ 6,7,8,9,10,11,12,1,2,3,4,5,6,7 ]
-		, contract_range : [ "2020.06","2020.07","2020.08","2020.09","2020.10","2020.11","2020.12","2021.01","2021.02","2021.03","2021.04","2021.05","2021.06","2021.07" ]
+//		, contract_range : [ "2020.06","2020.07","2020.08","2020.09","2020.10","2020.11","2020.12","2021.01","2021.02","2021.03","2021.04","2021.05","2021.06","2021.07" ]
 	}
 	, wellderma : { 
 		text : "WELLDERMA"
@@ -70,7 +70,7 @@ var bramdNms = {
 	, aheads : { 
 		text : "AHEADS"
 		, imgPath : "https://cdn.imweb.me/thumbnail/20201012/6c72b00ac8ea4.png"
-		, contract_range : [ 10,11,12,1,2,3 ]
+		, contract_range : [ 10,11,12,1,2,3,6,7 ]
 	}
 	, ashseven : {
 		text : "ashseven"
@@ -144,8 +144,8 @@ var FN00 = function( d ){
 		else
 		{
 			_html += "<tr>\n";
-			//var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( Number( global.CONST.config.targetMonth ) );
-			var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( global.CONST.config._targetMonth );
+			var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( Number( global.CONST.config.targetMonth ) );
+			//var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( global.CONST.config._targetMonth );
 			var cnt = 0
 			io.forEach(function(d){ 
 				
@@ -974,7 +974,8 @@ global.CONST.config.targetMonth = "10";
 
 var _strGoogleTopSeo = "";
 if( _o_data.google_seo_list ) _strGoogleTopSeo = FN09( _o_data.google_seo_list ) 
-
+/*/
+//베리홉
 var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.statistic_monthly ) )
 				.replace( "<!=LOGO_URL=!>", bramdNms[ global.CONST.config.brandNm ].imgPath )
 				.replace( "<!=TARGET_BRAND=!>", bramdNms[ global.CONST.config.brandNm ].text )
@@ -993,7 +994,27 @@ var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.sta
 				//.replace( "<!=GOOGLE_AGE_PIE=!>", _strGoogleAgePie )
 				.replace( "<!=GOOGLE_TOP_SEO=!>", _strGoogleTopSeo )
 				.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
-
+/*/
+//어헤즈
+var _tString = reportSource.replace( "<!=MONTHLY_STATSTIC=!>", FN00( _o_data.statistic_monthly ) )
+				.replace( "<!=LOGO_URL=!>", bramdNms[ global.CONST.config.brandNm ].imgPath )
+				.replace( "<!=TARGET_BRAND=!>", bramdNms[ global.CONST.config.brandNm ].text )
+				.replace( "<!=TARGET_YEAR=!>", global.CONST.config.targetYear )
+				.replace( "<!=TARGET_MONTH=!>", pad( global.CONST.config.targetMonth, 2 ) )
+				.replace( "<!=INSIGHT=!>", FN06( _o_data.insight[0] ) )
+				.replace( "<!=MARKETING_LIST=!>", FN01( _o_data.ads_list ) )
+				.replace( "<!=MARKETING_LIST_TOTAL=!>", FN02( _o_data.ads_list ) )
+				//.replace( "<!=FACEBOOK_LOCATION=!>", FN04( _o_data.location_data ) )
+				//.replace( "<!=MONTHLY_FACEBOOK_STASTICS=!>", FN03( _o_data.total ) )
+				//.replace( "<!=FACEBOOK_PIE_CHART=!>", _strFacebookAgePie )
+				//.replace( "<!=FACEBOOK_BAR_CHART=!>", _strFacebookTimeBar )
+				//.replace( "<!=FACEBOOK_LOCATION_CHART=!>", _strFacebookLoctionMap )
+				//.replace( "<!=GOOGLE_BAR_CHART=!>", _strGoogleTimeBar )
+				//.replace( "<!=MONTHLY_GOOGLE_STASTICS=!>", FN08( _o_data.google_total ) )
+				//.replace( "<!=GOOGLE_AGE_PIE=!>", _strGoogleAgePie )
+				//.replace( "<!=GOOGLE_TOP_SEO=!>", _strGoogleTopSeo )
+				//.replace( "<!=KOLS=!>", FN05( _o_data.kols ) );
+//*/
 fs.writeFileSync( savePath + saveFileNm + ".html" , _tString,{ flag : 'w' } )
 
 
