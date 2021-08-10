@@ -18,8 +18,8 @@ global.CONST.config.brandNm = "varihope";
 //global.CONST.config.brandNm = "ashseven";
 //global.CONST.config.brandNm = "bxxxy";
 global.CONST.config.targetYear = "2021";
-global.CONST.config.targetMonth = "05";
-global.CONST.config._targetMonth = "2021.06";
+global.CONST.config.targetMonth = "07";
+global.CONST.config._targetMonth = "2021.07";
 global.CONST.config.curPath = process.cwd().replace(/\\/gi,"/") + "/";
 //-----------------------------------------------------------------;
 // VARIABLE;
@@ -59,8 +59,8 @@ var bramdNms = {
 	varihope : { 
 		text : "VARI:HOPE"
 		, imgPath : "https://cdn.imweb.me/thumbnail/20200626/dcfd77a936797.png" 
-		, contract_range : [ 6,7,8,9,10,11,12,1,2,3,4,5,6 ]
-//		, contract_range : [ "2020.06","2020.07","2020.08","2020.09","2020.10","2020.11","2020.12","2021.01","2021.02","2021.03","2021.04","2021.05","2021.06" ]
+//		, contract_range : [ 6,7,8,9,10,11,12,1,2,3,4,5,6,7 ]
+		, contract_range : [ "2020.06","2020.07","2020.08","2020.09","2020.10","2020.11","2020.12","2021.01","2021.02","2021.03","2021.04","2021.05","2021.06","2021.07" ]
 	}
 	, wellderma : { 
 		text : "WELLDERMA"
@@ -144,8 +144,8 @@ var FN00 = function( d ){
 		else
 		{
 			_html += "<tr>\n";
-			var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( Number( global.CONST.config.targetMonth ) );
-			//var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( global.CONST.config._targetMonth );
+			//var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( Number( global.CONST.config.targetMonth ) );
+			var chk_curMonth = bramdNms[ global.CONST.config.brandNm ].contract_range.indexOf( global.CONST.config._targetMonth );
 			var cnt = 0
 			io.forEach(function(d){ 
 				
